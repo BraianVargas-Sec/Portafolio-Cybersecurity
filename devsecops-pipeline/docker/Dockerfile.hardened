@@ -1,0 +1,72 @@
+# Dockerfile.hardened
+# Dockerfile con mejores prácticas de seguridad
+# Autor: briamrlz82
+
+# ── Stage 1: Build ───────────────────────────────────────────────
+FROM python:3.11-slim AS builder
+
+WORKDIR /build
+
+# Copiar solo requirements primero (mejor cache)
+COPY requirements.txt .
+
+# Instalar dependencias sin cache y sin paquetes extra
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+# ── Stage 2: Runtime (imagen final mínima) ───────────────────────
+FROM python:3.11-slim AS runtime
+
+# Metadata
+LABEL maintainer="briamrlz82"
+LABEL security.hardened="true"
+
+# ── Crear usuario no-root ────────────────────────────────────────
+RUN groupadd --gid 1001 appgroup && \
+    useradd --uid 1001 --gid appgroup --no-create-home --shell /bin/false appuser
+
+WORKDIR /app
+
+# Copiar dependencias del stage anterior
+COPY --from=builder /root/.local /home/appuser/.local
+
+# Copiar código de la aplicación
+COPY --chown=appuser:appgroup src/ ./src/
+
+# ── Hardening del filesystem ─────────────────────────────────────
+# Permisos restrictivos
+RUN chmod -R 550 /app && \
+    chmod -R 440 /app/src
+
+# ── Eliminar herramientas innecesarias ───────────────────────────
+RUN apt-get update && \
+    apt-get remove -y --purge \
+        curl wget gcc make binutils && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# ── Variables de entorno seguras ─────────────────────────────────
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/home/appuser/.local/lib/python3.11/site-packages \
+    PATH=/home/appuser/.local/bin:$PATH
+
+# ── Cambiar a usuario no-root ────────────────────────────────────
+USER appuser
+
+# ── Healthcheck ──────────────────────────────────────────────────
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import src.main; print('ok')" || exit 1
+
+# ── Punto de entrada ─────────────────────────────────────────────
+CMD ["python", "-m", "src.main"]
+
+# ── Notas de seguridad ───────────────────────────────────────────
+# ✅ Multi-stage build — imagen final sin herramientas de build
+# ✅ Usuario no-root (UID 1001)
+# ✅ Sin curl, wget, gcc en imagen final
+# ✅ Filesystem de solo lectura compatible (montar /tmp como tmpfs)
+# ✅ PYTHONDONTWRITEBYTECODE — sin archivos .pyc
+# ✅ Healthcheck definido
+# Para ejecutar con máxima restricción:
+# docker run --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges app:secure
