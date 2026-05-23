@@ -1,0 +1,132 @@
+# .github/workflows/security-pipeline.yml
+# Pipeline de seguridad completo: secrets, CVEs, SAST, Docker hardening
+# Autor: briamrlz82
+
+name: 🔒 Security Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  # ── JOB 1: Detección de secrets ───────────────────────────────
+  secret-scan:
+    name: 🔑 Secret Detection (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Historial completo para escanear todos los commits
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Falla automáticamente si encuentra secrets
+
+  # ── JOB 2: SAST con Semgrep ───────────────────────────────────
+  sast-scan:
+    name: 🔍 SAST Analysis (Semgrep)
+    runs-on: ubuntu-latest
+    needs: secret-scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/python
+            p/owasp-top-ten
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
+      - name: Upload SAST results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: semgrep-results
+          path: semgrep.sarif
+
+  # ── JOB 3: Lint del Dockerfile ────────────────────────────────
+  dockerfile-lint:
+    name: 🐳 Dockerfile Lint (Hadolint)
+    runs-on: ubuntu-latest
+    needs: secret-scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: docker/Dockerfile.hardened
+          failure-threshold: warning
+
+  # ── JOB 4: Build y escaneo de imagen Docker ───────────────────
+  container-scan:
+    name: 📦 Container Scan (Trivy)
+    runs-on: ubuntu-latest
+    needs: [sast-scan, dockerfile-lint]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -f docker/Dockerfile.hardened \
+            -t app:${{ github.sha }} .
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: app:${{ github.sha }}
+          format: table
+          exit-code: 1                    # Falla el build si hay CVEs críticos
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+
+      - name: Upload Trivy results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-results
+          path: trivy-results.sarif
+
+  # ── JOB 5: Escaneo de dependencias ───────────────────────────
+  dependency-scan:
+    name: 📋 Dependency Scan (Trivy)
+    runs-on: ubuntu-latest
+    needs: secret-scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan filesystem dependencies
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: 1
+
+  # ── JOB 6: Reporte de seguridad ───────────────────────────────
+  security-report:
+    name: 📊 Security Report
+    runs-on: ubuntu-latest
+    needs: [container-scan, dependency-scan]
+    if: always()
+    steps:
+      - name: Security summary
+        run: |
+          echo "## 🔒 Security Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Secret Detection | ${{ needs.secret-scan.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| SAST (Semgrep) | ${{ needs.sast-scan.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Container Scan | ${{ needs.container-scan.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Dependency Scan | ${{ needs.dependency-scan.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
