@@ -169,7 +169,7 @@ Cada proyecto de este portafolio incluye:
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/briamrlz82)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/braian-vargas/)
 [![GitHub](https://img.shields.io/badge/GitHub-briamrlz82-181717?style=for-the-badge&logo=github)](https://github.com/briamrlz82)
 [![Email](https://img.shields.io/badge/Email-Contacto-D14836?style=for-the-badge&logo=gmail)](mailto:braii3015@gmail.com)
 
