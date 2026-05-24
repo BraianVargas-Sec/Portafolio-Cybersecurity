@@ -7,11 +7,11 @@
 ╚══════════════════════════════════════════════════════╝
 ```
 
-[![SOC](https://img.shields.io/badge/Role-SOC%20Analyst-0d1117?style=for-the-badge&logo=shield&logoColor=00ff88)](.)
-[![Detection](https://img.shields.io/badge/Focus-Detection%20Engineering-0d1117?style=for-the-badge&logoColor=00ff88)](.)
-[![RedTeam](https://img.shields.io/badge/Red%20Team-AD%20%2F%20Evasion-0d1117?style=for-the-badge&logoColor=ff4444)](.)
-[![DevSecOps](https://img.shields.io/badge/DevSecOps-Pipeline%20Security-0d1117?style=for-the-badge&logo=github-actions&logoColor=00ff88)](.)
-[![AI](https://img.shields.io/badge/AI-Applied%20to%20Security-0d1117?style=for-the-badge&logo=openai&logoColor=00ff88)](.)
+![SOC](https://img.shields.io/badge/Role-SOC%20Analyst-0d1117?style=for-the-badge&logo=shield&logoColor=00ff88)
+![Detection](https://img.shields.io/badge/Focus-Detection%20Engineering-0d1117?style=for-the-badge&logoColor=00ff88)
+![RedTeam](https://img.shields.io/badge/Red%20Team-AD%20%2F%20Evasion-0d1117?style=for-the-badge&logoColor=ff4444)
+![DevSecOps](https://img.shields.io/badge/DevSecOps-Pipeline%20Security-0d1117?style=for-the-badge&logo=github-actions&logoColor=00ff88)
+![AI](https://img.shields.io/badge/AI-Applied%20to%20Security-0d1117?style=for-the-badge&logo=openai&logoColor=00ff88)
 
 </div>
 
