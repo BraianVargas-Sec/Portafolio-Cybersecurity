@@ -1,9 +1,10 @@
+
 <div align="center">
 
 ```
 ╔══════════════════════════════════════════════════════╗
 ║          CYBERSECURITY PORTFOLIO                     ║
-║          Brian · SOC · Red Team · DevSecOps          ║
+║          Braian · SOC · Red Team · DevSecOps         ║
 ╚══════════════════════════════════════════════════════╝
 ```
 
@@ -55,7 +56,7 @@ Portafolio-Ciberseguridad/
 
 ## 🚀 Proyectos
 
-### 🔵 [soc-lab-wazuh](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/soc-lab-wazuh)
+### 🔵 [soc-lab-wazuh](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/soc-lab-wazuh)
 > Laboratorio completo de detección con Wazuh + Sysmon + reglas mapeadas a MITRE ATT&CK
 
 | Case | Técnica | MITRE | 
@@ -69,7 +70,7 @@ Portafolio-Ciberseguridad/
 
 ---
 
-### 🟢 [windows-hardening](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/windows-hardening)
+### 🟢 [windows-hardening](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/windows-hardening)
 > Hardening de sistemas Windows basado en CIS Benchmark v2.0
 
 - Scripts PowerShell para aplicar controles CIS automáticamente
@@ -81,7 +82,7 @@ Portafolio-Ciberseguridad/
 
 ---
 
-### 🐧 [linux-hardening](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/linux-hardening)
+### 🐧 [linux-hardening](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/linux-hardening)
 > Hardening de sistemas Linux (Ubuntu/Debian) con scripts automatizados
 
 - SSH hardening con algoritmos modernos (Ed25519, ChaCha20)
@@ -93,7 +94,7 @@ Portafolio-Ciberseguridad/
 
 ---
 
-### 🔴 [ad-pentest-lab](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/ad-pentest-lab)
+### 🔴 [ad-pentest-lab](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/ad-pentest-lab)
 > Laboratorio de Active Directory: ataques, detección y mitigación
 
 - Kerberoasting con Impacket + detección por encryption type 0x17
@@ -104,7 +105,7 @@ Portafolio-Ciberseguridad/
 
 ---
 
-### 🔴 [evasion-techniques](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/evasion-techniques)
+### 🔴 [evasion-techniques](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/evasion-techniques)
 > Bypass de AV/EDR y AMSI — técnicas ofensivas con contrapartida defensiva
 
 - AMSI bypass via memory patching y .NET Reflection
@@ -115,7 +116,7 @@ Portafolio-Ciberseguridad/
 
 ---
 
-### 🟡 [devsecops-pipeline](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/devsecops-pipeline)
+### 🟡 [devsecops-pipeline](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/devsecops-pipeline)
 > Pipeline CI/CD con seguridad integrada en cada etapa
 
 - Gitleaks para detección de secrets en código
@@ -127,7 +128,7 @@ Portafolio-Ciberseguridad/
 
 ---
 
-### 🟣 [ai-soc-assistant](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/ai-soc-assistant)
+### 🟣 [ai-soc-assistant](https://github.com/BraianVargas-Sec/Portafolio-Cybersecurity/tree/main/ai-soc-assistant)
 > Asistente de IA para análisis y triaje de alertas de seguridad
 
 - Integración con API de Wazuh para ingesta de alertas en tiempo real
@@ -188,8 +189,8 @@ Cada proyecto incluye:
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/braian-vargas/)
-[![GitHub](https://img.shields.io/badge/GitHub-briamrlz82-181717?style=for-the-badge&logo=github)](https://github.com/briamrlz82)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Braian%20Vargas-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/braian-vargas/)
+[![GitHub](https://img.shields.io/badge/GitHub-BraianVargas--Sec-181717?style=for-the-badge&logo=github)](https://github.com/BraianVargas-Sec)
 
 *Abierto a oportunidades en SOC, Detection Engineering, Red Team y DevSecOps*
 
