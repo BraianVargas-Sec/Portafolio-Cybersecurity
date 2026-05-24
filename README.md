@@ -3,12 +3,13 @@
 ```
 ╔══════════════════════════════════════════════════════╗
 ║          CYBERSECURITY PORTFOLIO                     ║
-║          Brian · SOC · Detection · DevSecOps         ║
+║          Brian · SOC · Red Team · DevSecOps          ║
 ╚══════════════════════════════════════════════════════╝
 ```
 
 [![SOC](https://img.shields.io/badge/Role-SOC%20Analyst-0d1117?style=for-the-badge&logo=shield&logoColor=00ff88)](.)
-[![Detection](https://img.shields.io/badge/Focus-Detection%20Engineering-0d1117?style=for-the-badge&logo=searchengineland&logoColor=00ff88)](.)
+[![Detection](https://img.shields.io/badge/Focus-Detection%20Engineering-0d1117?style=for-the-badge&logoColor=00ff88)](.)
+[![RedTeam](https://img.shields.io/badge/Red%20Team-AD%20%2F%20Evasion-0d1117?style=for-the-badge&logoColor=ff4444)](.)
 [![DevSecOps](https://img.shields.io/badge/DevSecOps-Pipeline%20Security-0d1117?style=for-the-badge&logo=github-actions&logoColor=00ff88)](.)
 [![AI](https://img.shields.io/badge/AI-Applied%20to%20Security-0d1117?style=for-the-badge&logo=openai&logoColor=00ff88)](.)
 
@@ -30,7 +31,7 @@ Analista de ciberseguridad con foco en **detección, respuesta y defensa activa*
 |------|------------|-------|
 | 🔵 SOC & Detection Engineering | Wazuh · Sysmon · Sigma · MITRE ATT&CK | ██████████ Activo |
 | 🟢 Hardening | CIS Benchmark · GPO · Auditd · Fail2ban | █████████░ Alto |
-| 🔴 Pentesting | Active Directory · Kerberoasting · PTH | ███████░░░ Medio |
+| 🔴 Red Team / Pentesting | Active Directory · Evasion · C2 | ███████░░░ Medio-Alto |
 | 🟡 DevSecOps | Docker · CI/CD · Trivy · Gitleaks | ████████░░ Creciendo |
 | 🟣 IA aplicada | Python · LLMs · Automatización SOC | ████████░░ Creciendo |
 
@@ -41,82 +42,100 @@ Analista de ciberseguridad con foco en **detección, respuesta y defensa activa*
 ```
 Portafolio-Ciberseguridad/
 │
-├── 📂 wazuh/                    # SIEM Lab - reglas, alertas, integraciones
-├── 📂 windows-hardening/        # CIS Benchmark, GPOs, Defender, ASR Rules
-├── 📂 linux-hardening/          # SSH, Fail2ban, Auditd, UFW
-├── 📂 ad-pentest-lab/           # Active Directory attacks & detection
-├── 📂 detection-rules/          # Sigma rules → Wazuh, MITRE mapping
-├── 📂 devsecops-pipeline/       # CI/CD con SAST, Trivy, Gitleaks
-├── 📂 incident-response/        # Playbooks y casos reales documentados
-├── 📂 ai-soc-assistant/         # IA aplicada al análisis de alertas
-├── 📂 writeups/                 # CTFs y laboratorios documentados
-└── 📂 PowerShell/               # Scripts de detección y automatización
+├── 📂 soc-lab-wazuh/           # SIEM Lab — detección + MITRE ATT&CK
+├── 📂 windows-hardening/       # CIS Benchmark + scripts PowerShell
+├── 📂 linux-hardening/         # SSH + Fail2ban + Auditd + UFW
+├── 📂 ad-pentest-lab/          # Active Directory attacks & detection
+├── 📂 evasion-techniques/      # Bypass AV/EDR + AMSI
+├── 📂 devsecops-pipeline/      # CI/CD con SAST + Trivy + Gitleaks
+└── 📂 ai-soc-assistant/        # IA aplicada al análisis de alertas
 ```
 
 ---
 
-## 🚀 Proyectos destacados
+## 🚀 Proyectos
 
-### 🔵 [soc-lab-wazuh](./wazuh)
-> Laboratorio completo de detección con Wazuh + Sysmon + reglas personalizadas
+### 🔵 [soc-lab-wazuh](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/soc-lab-wazuh)
+> Laboratorio completo de detección con Wazuh + Sysmon + reglas mapeadas a MITRE ATT&CK
 
-- Detección de PowerShell malicioso (obfuscation, encoded commands, AMSI bypass)
-- Reglas Sigma convertidas a formato Wazuh
-- Mapeo a MITRE ATT&CK por táctica y técnica
-- Integración con Active Directory para correlación de eventos
-- Dashboards de Kibana para visualización de amenazas
+| Case | Técnica | MITRE | 
+|------|---------|-------|
+| 001 | PowerShell EncodedCommand | T1059.001 |
+| 002 | LOLBAS — certutil | T1218 |
+| 003 | Mimikatz / LSASS dump | T1003.001 |
+| 004 | Lateral Movement PsExec | T1570 |
 
-**Stack:** `Wazuh` `Sysmon` `Windows Event Logs` `Python` `Sigma`
+**Stack:** `Wazuh` `Sysmon` `Sigma` `Windows Event Logs` `Python`
 
 ---
 
-### 🟢 [windows-hardening](./windows-hardening)
+### 🟢 [windows-hardening](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/windows-hardening)
 > Hardening de sistemas Windows basado en CIS Benchmark v2.0
 
 - Scripts PowerShell para aplicar controles CIS automáticamente
-- Políticas de grupo (GPO) exportadas y documentadas
-- Configuración de Defender Hardening + ASR Rules
+- 10 ASR Rules configuradas con modo Block/Audit
 - PowerShell Logging (ScriptBlock, Module, Transcription)
-- Implementación de LAPS para gestión de contraseñas locales
+- Credential Guard, PPL para LSASS, WDigest deshabilitado
 
-**Stack:** `PowerShell` `Group Policy` `Windows Server` `CIS Controls`
+**Stack:** `PowerShell` `CIS Benchmark` `Windows Defender` `GPO`
 
 ---
 
-### 🔴 [ad-pentest-lab](./ad-pentest-lab)
+### 🐧 [linux-hardening](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/linux-hardening)
+> Hardening de sistemas Linux (Ubuntu/Debian) con scripts automatizados
+
+- SSH hardening con algoritmos modernos (Ed25519, ChaCha20)
+- Fail2ban con jails SSH agresivo (ban 24h)
+- Auditd con reglas para /etc/passwd, sudo, execve, módulos kernel
+- UFW con política default deny + rate limiting
+
+**Stack:** `Bash` `SSH` `Fail2ban` `Auditd` `UFW` `CIS Benchmark`
+
+---
+
+### 🔴 [ad-pentest-lab](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/ad-pentest-lab)
 > Laboratorio de Active Directory: ataques, detección y mitigación
 
-- Entorno AD vulnerable en VMs locales
-- Técnicas: Kerberoasting, Pass-the-Hash, AS-REP Roasting, BloodHound
+- Kerberoasting con Impacket + detección por encryption type 0x17
+- Pass-the-Hash con CrackMapExec + LAPS como mitigación
 - Por cada ataque: regla de detección en Wazuh + mitigación documentada
-- Reportes técnicos en formato profesional
 
-**Stack:** `Active Directory` `Impacket` `BloodHound` `Wazuh` `PowerShell`
-
----
-
-### 🟡 [devsecops-pipeline](./devsecops-pipeline)
-> Pipeline CI/CD con seguridad integrada desde el código hasta el contenedor
-
-- SAST con Semgrep integrado en GitHub Actions
-- Escaneo de contenedores con Trivy
-- Detección de secrets con Gitleaks
-- Docker hardening (non-root, read-only FS, capabilities drop)
-- Políticas de seguridad como código
-
-**Stack:** `GitHub Actions` `Docker` `Trivy` `Gitleaks` `Semgrep`
+**Stack:** `Active Directory` `Impacket` `BloodHound` `CrackMapExec` `Wazuh`
 
 ---
 
-### 🟣 [ai-soc-assistant](./ai-soc-assistant)
+### 🔴 [evasion-techniques](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/evasion-techniques)
+> Bypass de AV/EDR y AMSI — técnicas ofensivas con contrapartida defensiva
+
+- AMSI bypass via memory patching y .NET Reflection
+- Defender evasion: obfuscación, exclusiones, payloads fileless
+- Para cada técnica: cómo detectarla desde el SOC con Wazuh
+
+**Stack:** `PowerShell` `Windows Internals` `AMSI` `Windows Defender`
+
+---
+
+### 🟡 [devsecops-pipeline](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/devsecops-pipeline)
+> Pipeline CI/CD con seguridad integrada en cada etapa
+
+- Gitleaks para detección de secrets en código
+- Trivy para escaneo de CVEs en imágenes Docker y dependencias
+- Semgrep para análisis estático (SAST)
+- Dockerfile hardened: non-root, multi-stage, sin herramientas innecesarias
+
+**Stack:** `GitHub Actions` `Docker` `Trivy` `Gitleaks` `Semgrep` `Hadolint`
+
+---
+
+### 🟣 [ai-soc-assistant](https://github.com/briamrlz82/Portafolio-Cybersecurity/tree/main/ai-soc-assistant)
 > Asistente de IA para análisis y triaje de alertas de seguridad
 
-- Integración con API de Wazuh para ingesta de alertas
-- Clasificación automática de eventos por severidad y táctica MITRE
+- Integración con API de Wazuh para ingesta de alertas en tiempo real
+- Clasificación automática por severidad y táctica MITRE ATT&CK
 - Generación de resúmenes ejecutivos para el equipo SOC
-- Respuesta automatizada a incidentes de baja complejidad
+- Stack Python con arquitectura modular
 
-**Stack:** `Python` `Wazuh API` `LLMs` `Docker`
+**Stack:** `Python` `Wazuh API` `LLMs` `MITRE ATT&CK`
 
 ---
 
@@ -125,9 +144,9 @@ Portafolio-Ciberseguridad/
 ```
 DEFENSA                          OFENSIVA
 ──────────────────────────────   ──────────────────────────────
-Wazuh          ████████████     Metasploit     ████░░░░░░░░
-Sysmon         ████████████     Impacket       ████████░░░░
-Elastic Stack  ████████░░░░     BloodHound     ██████░░░░░░
+Wazuh          ████████████     Impacket       ████████░░░░
+Sysmon         ████████████     BloodHound     ██████░░░░░░
+Elastic Stack  ████████░░░░     CrackMapExec   ██████░░░░░░
 Suricata       ██████░░░░░░     Burp Suite     ██████░░░░░░
 Zeek           ████░░░░░░░░     Nmap/Nessus    ████████░░░░
 
@@ -152,7 +171,7 @@ Sigma          ██████░░░░░░     Windows Server ███
 
 ## 📊 Metodología de trabajo
 
-Cada proyecto de este portafolio incluye:
+Cada proyecto incluye:
 
 ```
 1. CONTEXTO     → Qué problema resuelve / qué amenaza detecta
@@ -169,11 +188,10 @@ Cada proyecto de este portafolio incluye:
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/braian-vargas/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/briamrlz82)
 [![GitHub](https://img.shields.io/badge/GitHub-briamrlz82-181717?style=for-the-badge&logo=github)](https://github.com/briamrlz82)
-[![Email](https://img.shields.io/badge/Email-Contacto-D14836?style=for-the-badge&logo=gmail)](mailto:braii3015@gmail.com)
 
-*Abierto a oportunidades en SOC, Detection Engineering y DevSecOps*
+*Abierto a oportunidades en SOC, Detection Engineering, Red Team y DevSecOps*
 
 </div>
 
