@@ -188,7 +188,7 @@ Cada proyecto incluye:
 
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/briamrlz82)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-briamrlz82-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/braian-vargas/)
 [![GitHub](https://img.shields.io/badge/GitHub-briamrlz82-181717?style=for-the-badge&logo=github)](https://github.com/briamrlz82)
 
 *Abierto a oportunidades en SOC, Detection Engineering, Red Team y DevSecOps*
