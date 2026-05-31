@@ -18,8 +18,8 @@ Detección de ejecución de Mimikatz para dumping de credenciales en memoria en 
 | Host víctima | 192.168.100.30 (win10 - DESKTOP-BFU9I3D) |
 | Archivo malicioso | C:\Windows\Temp\mimikatz.exe |
 | Proceso padre | powershell.exe |
-| Hash NTLM extraído | 7307238bfd7d409da7b1d9bcd8f6b3fe |
-| Usuario comprometido | briamrlz82@gmail.com |
+| Hash NTLM extraído | [HASH_REDACTED] |
+| Usuario comprometido | usuario@ejemplo.com |
 | Herramienta | Mimikatz v2.2.0 |
 
 ## Evidencia
@@ -38,7 +38,7 @@ Detección de ejecución de Mimikatz para dumping de credenciales en memoria en 
 | Táctica | Execution |
 
 ## Análisis
-El atacante transfirió Mimikatz al directorio `C:\Windows\Temp` y lo ejecutó via PowerShell con privilegios de administrador. Mimikatz ejecutó `privilege::debug` para obtener el privilegio SeDebugPrivilege y `sekurlsa::logonpasswords` para extraer credenciales de la memoria LSASS. Se obtuvo el hash NTLM `7307238bfd7d409da7b1d9bcd8f6b3fe` del usuario `briamrlz82@gmail.com`. Wazuh detectó la ejecución del binario desde una ubicación sospechosa.
+El atacante transfirió Mimikatz al directorio `C:\Windows\Temp` y lo ejecutó via PowerShell con privilegios de administrador. Mimikatz ejecutó `privilege::debug` para obtener el privilegio SeDebugPrivilege y `sekurlsa::logonpasswords` para extraer credenciales de la memoria LSASS. Se obtuvo el hash NTLM `[HASH_REDACTED]` del usuario `usuario@ejemplo.com`. Wazuh detectó la ejecución del binario desde una ubicación sospechosa.
 
 ## Respuesta
 
